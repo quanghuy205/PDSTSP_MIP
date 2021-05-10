@@ -1,0 +1,2 @@
+num_drones,num_trucks,truck_cap,drone_cap,truck_speed,drone_speed,drone_endurance,Tdrone,Ttruck,alpha,beta
+5,20,100,1,200,200,20,14,5,25,1
