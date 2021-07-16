@@ -215,11 +215,11 @@ class Data:
             expr2.clear()
 
 # %%
-path = "/home/fatpc/huyvq/Git/PDSTSP_MIP/min-cost VRPD instances/min-cost VRPD-MurrayChu/PDSTSP_20_customer_problems"
-dirs = os.listdir(path)
-problems_list = [file for file in dirs]
-
-print(problems_list)
+# path = "/home/fatpc/huyvq/Git/PDSTSP_MIP/min-cost VRPD instances/min-cost VRPD-MurrayChu/PDSTSP_20_customer_problems"
+# dirs = os.listdir(path)
+# problems_list = [file for file in dirs]
+#
+# print(problems_list)
 
 data = Data()
 data.model = Model("test")
