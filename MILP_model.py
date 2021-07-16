@@ -223,7 +223,7 @@ print(problems_list)
 
 data = Data()
 data.model = Model("test")
-data.readData(path + "/" + problems_list[0])
+data.readData("20140813T125053.csv")
 data.addConstrs()
 data.model.optimize()
 # %%
