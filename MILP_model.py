@@ -207,7 +207,7 @@ class Data:
                 for k in U:
                     if i in C_U:
                         expr2.addTerms(1.0, self.y[k][i])
-            self.model.update()
+            # self.model.update()
             #     print(expr1)
             #     print(expr2)
             self.model.addConstr(expr1 + expr2 >= 1)
