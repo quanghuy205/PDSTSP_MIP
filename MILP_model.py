@@ -182,7 +182,10 @@ class Data:
         S = [list(s) for s in S]
 
         #         print(len(S))
-        #         import sys
+        #         import sysdata.model = Model("test")
+# data.readData("20140813T125053.csv")
+# data.addConstrs()
+# data.model.optimize()
         #         print(sys.getsizeof(S)/1024/1024," GB")
         #         print(type(S))
 
@@ -223,11 +226,18 @@ class Data:
 
 data = Data()
 data.model = Model("test")
-data.readData("20140813T125053.csv")
+data.readData("20140813T112003.csv")
 data.addConstrs()
 data.model.optimize()
 # %%
+print(data.model.ObjVal, data.model.Runtime)
+attx = data.model.printAttr('x')
+# # attx = data.model.getAttr('X' == 1)
+# print(attx)
 
+for v in data.model.getVars():
+    if v.x == 1:
+        print('%s %g' % (v.varName, v.x))
 # results = []/home/fatpc/huyvq/Git/PDSTSP_MIP/min-cost VRPD instances/min-cost VRPD-MurrayChu/PDSTSP_10_customer_problems
 # for prob in problems_list:
 #     data = Data()
