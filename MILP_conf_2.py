@@ -225,12 +225,10 @@ class Data:
 # print(problems_list)
 
 data = Data()
-
 data.model = Model("test")
 data.readData("20140813T112003.csv")
 data.addConstrs()
 data.model.optimize()
-
 # %%
 print(data.model.ObjVal, data.model.Runtime)
 attx = data.model.printAttr('x')
@@ -238,7 +236,7 @@ attx = data.model.printAttr('x')
 # print(attx)
 
 for v in data.model.getVars():
-    if v.x == 1:
+    if v.x == 1 and v.varName == 'x':
         print('%s %g' % (v.varName, v.x))
 # results = []/home/fatpc/huyvq/Git/PDSTSP_MIP/min-cost VRPD instances/min-cost VRPD-MurrayChu/PDSTSP_10_customer_problems
 # for prob in problems_list:
