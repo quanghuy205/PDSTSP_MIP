@@ -225,10 +225,12 @@ class Data:
 # print(problems_list)
 
 data = Data()
+
 data.model = Model("test")
 data.readData("20140813T112003.csv")
 data.addConstrs()
 data.model.optimize()
+
 # %%
 print(data.model.ObjVal, data.model.Runtime)
 attx = data.model.printAttr('x')
