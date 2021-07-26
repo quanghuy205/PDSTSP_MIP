@@ -235,9 +235,9 @@ df['obj'] = obj
 data = Data()
 
 data.model = Model("test")
-data.readData("PDSTSP_20_customer_problems/20140813T124853.csv")
+data.readData("PDSTSP_20_customer_problems/20140813T124931.csv")
 data.addConstrs()
-data.model.setParam("NodefileStart", 8.0)
+data.model.setParam("NodefileStart", 0.5)
 # data.model.setParam("TimeLimit", 600)
 data.model.optimize()
 

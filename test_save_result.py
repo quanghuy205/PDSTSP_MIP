@@ -217,44 +217,38 @@ class Data:
             expr1.clear()
             expr2.clear()
 
+
+
+
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
-print(dir_path)
+# print(dir_path)
 
 path = dir_path + "/10cus_test"
 dirs = os.listdir(path)
 problems_list = [file for file in dirs]
-print(problems_list)
-
-obj = [1 for file in dirs]
-
-df = pd.DataFrame()
-df['name'] = problems_list
-df['obj'] = obj
-
-data = Data()
-
-data.model = Model("test")
-data.readData("10cus_test/20140813T124853.csv")
-data.addConstrs()
-data.model.setParam("NodefileStart", 8.0)
-# data.model.setParam("TimeLimit", 600)
-data.model.optimize()
-
-# %%
-print(data.model.ObjVal, data.model.Runtime)
+# print(problems_list)
 
 
 
-# results = []/home/fatpc/huyvq/Git/PDSTSP_MIP/min-cost VRPD instances/min-cost VRPD-MurrayChu/PDSTSP_10_customer_problems
-# for prob in problems_list:
-#     data = Data()
-#     data.model = Model("PDSTSP")
-#     data.readData(
-#         "/home/quanghuy205/PDSTSP_model/min-cost VRPD instances/min-cost VRPD-MurrayChu/PDSTSP_10_customer_problems/" + prob)
-#     data.addConstrs()
-#
-#     data.model.optimize()
-#     results.append(data.model.ObjVal)
-#
-#
+
+
+for prob in problems_list:
+    data = Data()
+    data.model = Model("PDSTSP")
+    data.readData("10cus_test/" + prob)
+    data.addConstrs()
+    # data.model.setParam("NodefileStart", 0.5)
+    data.model.optimize()
+    obj = []
+    runtime = []
+    gap = []
+    df = pd.DataFrame()
+    runtime.append(data.model.Runtime)
+    obj.append(data.model.ObjVal)
+    gap.append(data.model.MIPGap)
+    df['obj'] = obj
+    df['runtime'] = runtime
+    df['gap'] = gap
+    df.to_csv(dir_path + '/test_Result/' + prob, index = False, header=False)
+
