@@ -221,7 +221,7 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 
 print(dir_path)
 
-path = dir_path + "/PDSTSP_20_customer_problems"
+path = dir_path + "/10cus_test"
 dirs = os.listdir(path)
 problems_list = [file for file in dirs]
 print(problems_list)
@@ -235,7 +235,7 @@ df['obj'] = obj
 data = Data()
 
 data.model = Model("test")
-data.readData("PDSTSP_20_customer_problems/20140813T124853.csv")
+data.readData("10cus_test/20140813T124853.csv")
 data.addConstrs()
 data.model.setParam("NodefileStart", 8.0)
 # data.model.setParam("TimeLimit", 600)
