@@ -238,7 +238,7 @@ data.model = Model("test")
 data.readData("PDSTSP_20_customer_problems/20140813T124847.csv")
 data.addConstrs()
 data.model.setParam("NodefileStart", 8.0)
-data.model.setParam("TimeLimit", 600)
+# data.model.setParam("TimeLimit", 600)
 data.model.optimize()
 
 # %%
