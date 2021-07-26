@@ -217,37 +217,34 @@ class Data:
             expr1.clear()
             expr2.clear()
 
-
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
 print(dir_path)
 
-# %%
-# path = "/home/fatpc/huyvq/Git/PDSTSP_MIP/min-cost VRPD instances/min-cost VRPD-MurrayChu/PDSTSP_20_customer_problems"
-# dirs = os.listdir(path)
-# problems_list = [file for file in dirs]
-#
-# print(problems_list)
+path = dir_path + "/PDSTSP_20_customer_problems"
+dirs = os.listdir(path)
+problems_list = [file for file in dirs]
+print(problems_list)
+
+obj = [1 for file in dirs]
+
+df = pd.DataFrame()
+df['name'] = problems_list
+df['obj'] = obj
 
 data = Data()
 
 data.model = Model("test")
-data.readData("20140813T112003.csv")
+data.readData("PDSTSP_20_customer_problems/20140813T124847.csv")
 data.addConstrs()
+data.model.setParam(GRB.TIME_LIMIT, 600)
+
 data.model.optimize()
 
 # %%
 print(data.model.ObjVal, data.model.Runtime)
 
 
-
-# attx = data.model.printAttr('x')
-# # # attx = data.model.getAttr('X' == 1)
-# # print(attx)
-#
-# for v in data.model.getVars():
-#     if v.x == 1 and v.varName == 'x':
-#         print('%s %g' % (v.varName, v.x))
 
 # results = []/home/fatpc/huyvq/Git/PDSTSP_MIP/min-cost VRPD instances/min-cost VRPD-MurrayChu/PDSTSP_10_customer_problems
 # for prob in problems_list:
@@ -261,41 +258,3 @@ print(data.model.ObjVal, data.model.Runtime)
 #     results.append(data.model.ObjVal)
 #
 #
-# # %%
-#
-# for r in results:
-#     print(prob)
-#
-# # %%
-#
-# data.model.printAttr('X')
-#
-# # %%
-#
-# data.model.getVars()
-#
-# # %%
-#
-# U = [k for k in range(data.droneNum)]
-#
-# C_U = data.cus_can_served_by_drone
-#
-# plt.plot(data.i_pot[0], data.i_pot[1], c='r', marker='s')
-# # plt.scatter(xc[1:], yc[1:], c='b')
-# for i in range(1, data.customerNum):
-#     plt.scatter(data.cor_X, data.cor_Y, c='b')
-#     plt.annotate(str("  ") + str(int(data.cities[i])), (data.cor_X[i], data.cor_Y[i]))
-#
-# for i, j in truck_tours:
-#     plt.plot([data.cor_X[i], data.cor_X[j]], [data.cor_Y[i], data.cor_Y[j]], c='g', zorder=0)
-#
-# default_width = 1
-#
-# for k in U:
-#     default_width += 2
-#     for i in C_U:
-#         if data.y[k][i].x > 0.99:
-#             plt.plot([data.i_pot[0], data.cor_X[i]], [data.i_pot[1], data.cor_Y[i]], color='black', linestyle='dashed',
-#                      linewidth=default_width)
-#
-# # %%
