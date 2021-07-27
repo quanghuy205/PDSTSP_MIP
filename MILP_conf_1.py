@@ -11,7 +11,7 @@ class Data:
     def __init__(self):
         self.customerNum = 0
         self.nodeNum = 0
-        self.droneNum = 3
+        self.droneNum = 1
         self.cities = []
         self.cor_X = []
         self.cor_Y = []
@@ -222,7 +222,7 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 
 # print(dir_path)
 
-path = dir_path + "/PDSTSP_10_customer_problems"
+path = dir_path + "/PDSTSP_20_customer_problems"
 dirs = os.listdir(path)
 problems_list = [file for file in dirs]
 # print(problems_list)
@@ -234,9 +234,9 @@ problems_list = [file for file in dirs]
 for prob in problems_list:
     data = Data()
     data.model = Model("PDSTSP")
-    data.readData("PDSTSP_10_customer_problems/" + prob)
+    data.readData("PDSTSP_20_customer_problems/" + prob)
     data.addConstrs()
-    # data.model.setParam("NodefileStart", 0.5)
+    data.model.setParam("NodefileStart", 0.5)
     data.model.optimize()
     obj = []
     runtime = []
@@ -248,7 +248,7 @@ for prob in problems_list:
     df['obj'] = obj
     df['runtime'] = runtime
     df['gap'] = gap
-    df.to_csv(dir_path + '/Results/10_customers/3/' + prob, index = False, header=False)
+    df.to_csv(dir_path + '/Results/20_customers/1/' + prob, index = False, header=False)
 
 
 
