@@ -11,7 +11,7 @@ class Data:
     def __init__(self):
         self.customerNum = 0
         self.nodeNum = 0
-        self.droneNum = 2
+        self.droneNum = 3
         self.cities = []
         self.cor_X = []
         self.cor_Y = []
@@ -217,27 +217,49 @@ class Data:
             expr1.clear()
             expr2.clear()
 
-# %%
-# path = "/home/fatpc/huyvq/Git/PDSTSP_MIP/min-cost VRPD instances/min-cost VRPD-MurrayChu/PDSTSP_20_customer_problems"
-# dirs = os.listdir(path)
-# problems_list = [file for file in dirs]
-#
+
+dir_path = os.path.dirname(os.path.realpath(__file__))
+
+# print(dir_path)
+
+path = dir_path + "/PDSTSP_20_customer_problems"
+dirs = os.listdir(path)
+problems_list = [file for file in dirs]
 # print(problems_list)
 
-data = Data()
-data.model = Model("test")
-data.readData("20140813T112003.csv")
-data.addConstrs()
-data.model.optimize()
-# %%
-print(data.model.ObjVal, data.model.Runtime)
-attx = data.model.printAttr('x')
-# # attx = data.model.getAttr('X' == 1)
-# print(attx)
 
-for v in data.model.getVars():
-    if v.x == 1 and v.varName == 'x':
-        print('%s %g' % (v.varName, v.x))
+
+
+
+for prob in problems_list:
+    data = Data()
+    data.model = Model("PDSTSP")
+    data.readData("PDSTSP_20_customer_problems/" + prob)
+    data.addConstrs()
+    data.model.setParam("NodefileStart", 0.5)
+    data.model.optimize()
+    obj = []
+    runtime = []
+    gap = []
+    df = pd.DataFrame()
+    runtime.append(data.model.Runtime)
+    obj.append(data.model.ObjVal)
+    gap.append(data.model.MIPGap)
+    df['obj'] = obj
+    df['runtime'] = runtime
+    df['gap'] = gap
+    df.to_csv(dir_path + '/Results/20_customers/3/' + prob, index = False, header=False)
+
+
+
+# attx = data.model.printAttr('x')
+# # # attx = data.model.getAttr('X' == 1)
+# # print(attx)
+#
+# for v in data.model.getVars():
+#     if v.x == 1 and v.varName == 'x':
+#         print('%s %g' % (v.varName, v.x))
+
 # results = []/home/fatpc/huyvq/Git/PDSTSP_MIP/min-cost VRPD instances/min-cost VRPD-MurrayChu/PDSTSP_10_customer_problems
 # for prob in problems_list:
 #     data = Data()
