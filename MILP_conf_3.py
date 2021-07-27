@@ -237,7 +237,7 @@ for prob in problems_list:
     data.readData("PDSTSP_20_customer_problems/" + prob)
     data.addConstrs()
     data.model.setParam("NodefileStart", 0.5)
-    data.model.setParam("MIPFocus", 1)
+    data.model.setParam("TimeLimit", 1800)
     data.model.setParam("Threads", 8)
     data.model.optimize()
     obj = []
