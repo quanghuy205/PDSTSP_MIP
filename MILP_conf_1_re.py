@@ -250,7 +250,7 @@ for prob in problems_list:
     df['runtime'] = runtime
     df['gap'] = gap
 
-    df.to_csv(dir_path + '/Results/20_customers/1/reopt' + prob, index=False, header=False)
+    df.to_csv(dir_path + '/Results/20_customers/1/reopt/' + prob, index=False, header=False)
 
 
 
