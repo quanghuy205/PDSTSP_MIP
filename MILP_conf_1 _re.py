@@ -249,6 +249,7 @@ for prob in problems_list:
     df['obj'] = obj
     df['runtime'] = runtime
     df['gap'] = gap
+
     df.to_csv(dir_path + '/Results/20_customers/1/reopt' + prob, index=False, header=False)
 
 
