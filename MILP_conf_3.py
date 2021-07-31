@@ -238,7 +238,7 @@ for prob in problems_list:
     data.addConstrs()
     data.model.setParam("NodefileStart", 0.5)
     data.model.setParam("TimeLimit", 1800)
-    data.model.setParam("Threads", 8)
+    # data.model.setParam("Threads", 8)
     data.model.optimize()
     obj = []
     runtime = []

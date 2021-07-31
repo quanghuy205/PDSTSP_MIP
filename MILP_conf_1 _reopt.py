@@ -218,27 +218,26 @@ class Data:
             expr2.clear()
 
 
-
-
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
 # print(dir_path)
 
-path = dir_path + "/10cus_test"
-dirs = os.listdir(path)
-problems_list = [file for file in dirs]
-# print(problems_list)
+path = dir_path + "/Results/20_customers/non_opt_1"
+# dirs = os.listdir(path)
+non_opt_1 = pd.read_csv(path, header=None)
+print(non_opt_1)
 
-
-
-
+problems_list = non_opt_1[0].tolist()
 
 for prob in problems_list:
     data = Data()
     data.model = Model("PDSTSP")
-    data.readData("10cus_test/" + prob)
+    data.readData("PDSTSP_20_customer_problems/" + prob)
     data.addConstrs()
     # data.model.setParam("NodefileStart", 0.5)
+    # data.model.setParam("TimeLimit", 1800)
+    # # data.model.setParam("MIPFocus", 3)
+    # data.model.setParam("Threads", 8)
     data.model.optimize()
     obj = []
     runtime = []
@@ -250,5 +249,31 @@ for prob in problems_list:
     df['obj'] = obj
     df['runtime'] = runtime
     df['gap'] = gap
-    df.to_csv(dir_path + '/test_Result/' + prob, index = False, header=False)
+    df.to_csv(dir_path + '/Results/20_customers/1/reopt' + prob, index=False, header=False)
 
+
+
+
+# for prob in problems_list:
+#     data = Data()
+#     data.model = Model("PDSTSP")
+#     data.readData("PDSTSP_20_customer_problems/" + prob)
+#     data.addConstrs()
+#     data.model.setParam("NodefileStart", 0.5)
+#     data.model.setParam("TimeLimit", 1800)
+#     # data.model.setParam("MIPFocus", 3)
+#     data.model.setParam("Threads", 8)
+#     data.model.optimize()
+#     obj = []
+#     runtime = []
+#     gap = []
+#     df = pd.DataFrame()
+#     runtime.append(data.model.Runtime)
+#     obj.append(data.model.ObjVal)
+#     gap.append(data.model.MIPGap)
+#     df['obj'] = obj
+#     df['runtime'] = runtime
+#     df['gap'] = gap
+#     df.to_csv(dir_path + '/Results/20_customers/1/' + prob, index = False, header=False)
+#
+#
