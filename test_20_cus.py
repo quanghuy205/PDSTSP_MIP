@@ -190,11 +190,11 @@ class Data:
         #         print(type(S))
 
         # for s in S:
-
+        #
         #         s.insert(0,0)
         S.insert(0, [0])
         S = S[0:len(S) - 1]
-        # print(S)
+        print(S)
         # S = [[0,1,2,3,4]]
 
         # 7
@@ -235,17 +235,18 @@ df['obj'] = obj
 data = Data()
 
 data.model = Model("test")
-data.readData("PDSTSP_20_customer_problems/20140813T125150.csv")
+data.readData("PDSTSP_10_customer_problems/20140813T111604.csv")
 data.addConstrs()
 # data.model.setParam("NodefileStart", 0.5)
-data.model.setParam("Threads", 8)
+# data.model.setParam("Threads", 8)
 # data.model.setParam("TimeLimit", 600)
 data.model.optimize()
 
 # %%
 print(data.model.ObjVal, data.model.Runtime)
-
-
+for v in data.model.getVars():
+       if v.x == 1:
+            print('%s %g' % (v.varName, v.x))
 
 # results = []/home/fatpc/huyvq/Git/PDSTSP_MIP/min-cost VRPD instances/min-cost VRPD-MurrayChu/PDSTSP_10_customer_problems
 # for prob in problems_list:

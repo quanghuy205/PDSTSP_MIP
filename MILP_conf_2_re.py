@@ -235,7 +235,7 @@ for prob in problems_list:
     data.readData("PDSTSP_20_customer_problems/" + prob)
     data.addConstrs()
     # data.model.setParam("NodefileStart", 0.5)
-    # data.model.setParam("TimeLimit", 1800)
+    data.model.setParam("TimeLimit", 10800)
     # # data.model.setParam("MIPFocus", 3)
     # data.model.setParam("Threads", 8)
     data.model.optimize()
@@ -250,7 +250,7 @@ for prob in problems_list:
     df['runtime'] = runtime
     df['gap'] = gap
 
-    df.to_csv(dir_path + '/Results/20_customers/2/reopt/' + prob, index=False, header=False)
+    df.to_csv(dir_path + '/Results/20_customers/2lim/' + prob, index=False, header=False)
 
 
 
